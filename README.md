@@ -1,1 +1,8 @@
 # minibook
+
+## Requirements
+- sqlc
+- goose
+
+
+
