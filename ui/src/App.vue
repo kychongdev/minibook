@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { VueQueryDevtools } from "@tanstack/vue-query-devtools";
-// import styles.css
-import "./styles.css";
+import './style.css'
 </script>
 
 <template>
-  TEST
-  <VueQueryDevtools />
+  <h1>You did it!</h1>
+  <p>
+    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
+    documentation
+  </p>
 </template>
 
 <style scoped></style>
