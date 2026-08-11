@@ -5,6 +5,7 @@ go 1.26.4
 require (
 	github.com/go-chi/chi/v5 v5.3.0
 	github.com/jackc/pgx/v5 v5.9.2
+	github.com/joho/godotenv v1.5.1
 	github.com/thecodearcher/limen v0.2.0
 	github.com/thecodearcher/limen/adapters/sql v0.2.0
 	github.com/thecodearcher/limen/plugins/credential-password v0.2.0

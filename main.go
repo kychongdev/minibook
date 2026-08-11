@@ -13,13 +13,15 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/joho/godotenv"
 	"github.com/thecodearcher/limen"
 	sqladapter "github.com/thecodearcher/limen/adapters/sql"
 	credentialpassword "github.com/thecodearcher/limen/plugins/credential-password"
 )
 
 func main() {
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	err := godotenv.Load()
+	db, err := sql.Open("pgx", os.Getenv("DATABASE_URL"))
 	// dbpool, err := pgxpool.New(context.Background(), os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
@@ -31,6 +33,9 @@ func main() {
 		Database: sqladapter.NewPostgreSQL(db),
 		Plugins: []limen.Plugin{
 			credentialpassword.New(),
+		},
+		CLI: &limen.CLIConfig{
+			Enabled: true,
 		},
 	}
 

@@ -14,16 +14,17 @@ import (
 
 func NewServer(dbpool *sql.DB, config *limen.Config) http.Handler {
 	r := chi.NewRouter()
+	r.Use(middleware.RequestID)
+	r.Use(middleware.ClientIPFromRemoteAddr)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+
 	auth, err := limen.New(config)
 	if err != nil {
 		log.Fatalf("Failed to create limen: %v", err)
 	}
 	handler := auth.Handler()
-	r.Mount("auth", handler)
-	r.Use(middleware.RequestID)
-	r.Use(middleware.ClientIPFromRemoteAddr)
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
+	r.Mount("/auth/", handler)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("sup"))
